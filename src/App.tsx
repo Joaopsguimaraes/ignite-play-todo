@@ -1,3 +1,15 @@
+import { CreateTodo } from "./components/CreateTodo";
+import { Header } from "./components/Header";
+import { Todo } from "./components/Todo";
+import { globalStyles } from "./styles/globalCss";
+
 export function App (){
-  return <h1> Ignite ReactJs</h1>
+  globalStyles();
+  return (
+    <>
+      <Header />
+      <CreateTodo />
+      <Todo />
+    </>
+  )
 }
