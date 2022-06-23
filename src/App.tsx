@@ -1,5 +1,5 @@
 import { CreateTodo } from "./components/CreateTodo";
-import { Header } from "./components/Header";
+import { Header } from "./Header";
 import { Todo } from "./components/Todo";
 import { globalStyles } from "./styles/globalCss";
 
@@ -9,7 +9,6 @@ export function App (){
     <>
       <Header />
       <CreateTodo />
-      <Todo />
     </>
   )
 }

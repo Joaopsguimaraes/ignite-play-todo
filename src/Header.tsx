@@ -1,6 +1,6 @@
 import React from "react";
-import { styled, theme } from "../../styles";
-import { Logo } from "../Logo";
+import { styled, theme } from "./styles";
+import { Logo } from "./components/Logo";
 
 
 const StyledHeader = styled("header", {

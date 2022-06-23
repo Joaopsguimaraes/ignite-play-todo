@@ -1,6 +1,5 @@
 import React from "react";
-import { styled, theme } from "../../styles";
-import { FiTrash } from "react-icons/fi";
+import { styled, theme } from "../styles";
 
 const StyledButton = styled("button", {
   cursor: "pointer",
@@ -20,19 +19,8 @@ const StyledButton = styled("button", {
   fontWeight: "$bold",
   lineHeight: "140%",
   color: theme.colors.gray100,
-});
-
-const StyledIconButton = styled("button", {
-  cursor: "pointer",
-  width: 24,
-  height: 24,
-  borderRadius: 4,
-  background: "transparent",
-  border: "none",
-  color: theme.colors.gray300,
   "&:hover": {
-    background: theme.colors.gray400,
-    color: theme.colors.danger,
+    background: theme.colors.blue,
   },
 });
 
@@ -40,8 +28,6 @@ type ButtonProps = React.ComponentProps<typeof StyledButton> & {
   children: React.ReactNode;
   as?: React.ElementType;
 };
-
-type IconButtonProps = React.ComponentProps<typeof StyledIconButton>;
 
 export function Button({ children, as, ...props }: ButtonProps) {
   return (
@@ -52,10 +38,3 @@ export function Button({ children, as, ...props }: ButtonProps) {
 }
 
 
-export function IconButton({ children, ...props }: IconButtonProps) {
-  return (
-    <StyledIconButton {...props}>
-      <FiTrash size={16}/>
-    </StyledIconButton>
-  );
-}

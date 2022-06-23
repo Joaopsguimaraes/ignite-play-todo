@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, theme } from "../../styles";
+import { styled, theme } from "../styles";
 
 const StyledInput = styled("input", {
   fontFamily: "$default",
