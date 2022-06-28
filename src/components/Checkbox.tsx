@@ -25,7 +25,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator,{
 type CheckboxProps = CheckboxPrimitive.CheckboxProps & React.ComponentProps<typeof StyledCheckbox>;
 
 
-export function Checkbox({...props}: CheckboxProps){
+export function Checkbox({...props}: CheckboxProps): JSX.Element{
     return(
         <StyledCheckbox {...props}>
             <StyledIndicator>

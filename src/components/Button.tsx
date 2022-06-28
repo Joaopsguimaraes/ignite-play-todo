@@ -24,17 +24,17 @@ const StyledButton = styled("button", {
   },
 });
 
-type ButtonProps = React.ComponentProps<typeof StyledButton> & {
+type IButton = React.ComponentProps<typeof StyledButton> &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
+interface ButtonProps extends IButton {
   children: React.ReactNode;
   as?: React.ElementType;
-};
+}
 
-export function Button({ children, as, ...props }: ButtonProps) {
+export function Button({ children, as, ...props }: ButtonProps): JSX.Element {
   return (
     <StyledButton as={as} {...props}>
       {children}
     </StyledButton>
   );
 }
-
-

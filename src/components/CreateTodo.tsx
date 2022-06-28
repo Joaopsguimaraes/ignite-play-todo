@@ -1,10 +1,9 @@
 import React from "react";
 import { v4 as uuid4 } from "uuid";
-import { styled } from "../styles";
+import { styled, theme } from "../styles";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { HeaderTodo } from "./HeaderTodo";
-import { Box as BoxTodo, ToolItem, ToolList } from "../styles/Todo/StylesTodo";
 import { IconButton } from "./IconButton";
 import { Checkbox } from "./Checkbox";
 import { FiPlusCircle } from "react-icons/fi";
@@ -24,20 +23,65 @@ const Box = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  flexDirection: "row",
   gap: 8,
 });
 
+export const BoxTodo = styled("section", {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  padding: 8,
+  gap: 24,
+  width: 736,
+  paddingTop: 20,
+});
+
+export const ToolList = styled("ul", {
+  listStyle: "none",
+  width: "100%",
+  height: 72,
+  display: "flex",
+  flexWrap: "wrap",
+  flexDirection: "row",
+  alignItems: "center",
+  alignSelf: "stretch",
+  gap: 12,
+  padding: 16,
+  background: theme.colors.gray500,
+  border: `1px solid ${theme.colors.gray400}`,
+  boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.06)",
+  borderRadius: 8,
+});
+
+export const ToolItem = styled("li", {
+  listStyle: "none",
+  fontFamily: "$default",
+  fontSize: "$14",
+  lineHeight: "140%",
+  fontWeight: "$regular",
+  color: theme.colors.gray100,
+  variants: {
+    complete: {
+      true: {
+        color: theme.colors.gray300,
+        textDecoration: "line-through",
+      },
+    },
+  },
+});
 interface Todo {
   id: string;
   description: string;
   isComplete: boolean;
 }
 
-export function CreateTodo() {
+export function CreateTodo(): JSX.Element {
   const [todo, setTodo] = React.useState<Todo[]>([]);
   const [descriptionTool, setDescriptionTool] = React.useState("");
 
-  function handleCreateNewTool() {
+  function handleCreateNewTool(): void {
     if (!descriptionTool) return;
 
     const newTodo = {
@@ -45,18 +89,21 @@ export function CreateTodo() {
       description: descriptionTool,
       isComplete: false,
     };
-    setTodo((oldTodo) => [...oldTodo, newTodo]);
+    setTodo((oldTodo: Todo[]): Todo[] => [...oldTodo, newTodo]);
     setDescriptionTool("");
   }
 
-  const handleDeleteTodo = (id: string) => {
-    const filteredTodo = todo.filter((todos) => todos.id !== id);
+  const handleDeleteTodo = (id: string): void => {
+    const filteredTodo: Todo[] = todo.filter(
+      (todos: Todo): boolean => todos.id !== id
+    );
     setTodo(filteredTodo);
   };
 
-  const handleComplete = (id: string) => {
-    const completeTodo = todo.map((todo) =>
-      todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+  const handleComplete = (id: string): void => {
+    const completeTodo: Todo[] = todo.map(
+      (todo: Todo): Todo =>
+        todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
     );
     setTodo(completeTodo);
   };
@@ -67,7 +114,9 @@ export function CreateTodo() {
         <Input
           placeholder="Adicione uma nova tarefa"
           value={descriptionTool}
-          onChange={(event) => setDescriptionTool(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+            setDescriptionTool(event.target.value)
+          }
         />
         <Button type="submit" onClick={handleCreateNewTool}>
           Criar
@@ -76,20 +125,22 @@ export function CreateTodo() {
       </Box>
       <HeaderTodo
         todosCreated={todo.length}
-        todosFinish={todo.filter((id) => id.isComplete === true).length}
+        todosFinish={
+          todo.filter((id: Todo): boolean => id.isComplete === true).length
+        }
       />
       <BoxTodo>
-        {todo.map((tool, id) => {
+        {todo.map((tool: Todo, id: number) => {
           return (
             <ToolList key={id}>
               <Checkbox
                 checked={tool.isComplete}
-                onClick={() => handleComplete(tool.id)}
+                onClick={(): void => handleComplete(tool.id)}
               />
               <ToolItem complete={tool.isComplete === true && true}>
                 {tool.description}
               </ToolItem>
-              <IconButton onClick={() => handleDeleteTodo(tool.id)} />
+              <IconButton onClick={(): void => handleDeleteTodo(tool.id)} />
             </ToolList>
           );
         })}

@@ -23,6 +23,6 @@ const StyledInput = styled("input", {
 
 type InputProps = React.ComponentProps<typeof StyledInput>;
 
-export function Input({ ...props }: InputProps) {
+export function Input({ ...props }: InputProps): JSX.Element {
   return <StyledInput {...props} />;
 }

@@ -22,7 +22,7 @@ const StyledIconButton = styled("button", {
 
 type IconButtonProps = React.ComponentProps<typeof StyledIconButton>;
 
-export function IconButton({ children, ...props }: IconButtonProps) {
+export function IconButton({ children, ...props }: IconButtonProps): JSX.Element {
   return (
     <StyledIconButton {...props}>
       <FiTrash size={18} />

@@ -12,18 +12,23 @@ interface TodoProps {
   onClick: () => void;
 }
 
-export function Todo({ newTodo, onClick }: TodoProps) {
+export function Todo({ newTodo, onClick }: TodoProps): JSX.Element {
   return (
     <BoxTodo>
-      {newTodo.map((tool, id) => {
-        return (
-          <ToolList key={id}>
-            <Checkbox />
-            <ToolItem>{tool.description}</ToolItem>
-                <IconButton onClick={onClick} />
-          </ToolList>
-        );
-      })}
+      {newTodo.map(
+        (
+          tool: { id: string; description: string },
+          id: number
+        ): JSX.Element => {
+          return (
+            <ToolList key={id}>
+              <Checkbox />
+              <ToolItem>{tool.description}</ToolItem>
+              <IconButton onClick={onClick} />
+            </ToolList>
+          );
+        }
+      )}
     </BoxTodo>
   );
 }
